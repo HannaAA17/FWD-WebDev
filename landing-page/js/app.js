@@ -23,6 +23,10 @@
  * 
 */
 
+const sections = Array.from(document.getElementsByTagName('section'));
+// const nav_bar = document.getElementById('navbar__list');
+// const dummy_tag = document.createDocumentFragment();
+const dummy_tag = document.getElementById('navbar__list');
 
 /**
  * End Global Variables
@@ -31,6 +35,13 @@
 */
 
 
+/* // fast scroll
+function scroll_maker(sec_id){
+    return () => {
+        document.getElementById(sec_id).scrollIntoView();
+    }
+}
+ */
 
 /**
  * End Helper Functions
@@ -39,7 +50,19 @@
 */
 
 // build the nav
-
+function build_nav() {
+    sections.forEach((element, index) => {
+        let a_tag = document.createElement('a');
+        a_tag.innerHTML = element.dataset.nav;
+        a_tag.classList.add("menu__link");
+        a_tag.href = `#section${index+1}`;
+        
+        let li_tag = document.createElement('li');
+        // li_tag.onclick = scroll_maker(`section${index+1}`);
+        li_tag.appendChild(a_tag);
+        dummy_tag.appendChild(li_tag);
+    })
+}
 
 // Add class 'active' to section when near top of viewport
 
@@ -54,7 +77,7 @@
 */
 
 // Build menu 
-
+build_nav();
 // Scroll to section on link click
 
 // Set sections as active
